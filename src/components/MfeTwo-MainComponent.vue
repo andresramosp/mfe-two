@@ -1,25 +1,31 @@
 <template>
-  <div class="hello">
-    <MfeTwoChildComponent/>
-    {{ moment().format('MMMM Do YYYY, h:mm:ss a') }}
+  <div class="hello" style="position: relative">
+    <div><MfeTwoChildComponent /></div>
+    <div class="shared-comp">
+      <SharedComponent />
+    </div>
+
+    {{ moment().format("MMMM Do YYYY, h:mm:ss a") }}
     <br />
     <span style="color: #409eff">{{ message }}</span>
   </div>
 </template>
 
 <script>
-import { ref } from "vue";
-import moment from "moment"
+import { ref, defineAsyncComponent } from "vue";
+import moment from "moment";
 import MfeTwoChildComponent from "./MfeTwo-ChildComponent.vue";
 
 export default {
   components: {
     MfeTwoChildComponent,
+    SharedComponent: defineAsyncComponent(() =>
+      import("MfeOne/SharedComponent")
+    ),
   },
   props: {},
 
   setup() {
-
     const message = ref("");
 
     window.addEventListener("hello-event", () => {
@@ -29,12 +35,11 @@ export default {
     // expose to template and other options API hooks
     return {
       message,
-      moment
+      moment,
     };
   },
 
-  mounted() {
-  },
+  mounted() {},
 };
 </script>
 
@@ -54,5 +59,12 @@ li {
 }
 a {
   color: #42b983;
+}
+.shared-comp {
+  background-color: lightgray;
+  padding: 10px;
+  width: 400px;
+  margin-top: 10px;
+
 }
 </style>

@@ -10,7 +10,11 @@
     <router-link to="/mfetwo-route2">Route 2</router-link>
     <br />
     <div v-if="logged" style="margin-top: 20px">
-      <router-view></router-view>
+        <router-view v-slot="{ Component }">
+        <keep-alive>
+          <component :is="Component" />
+        </keep-alive>
+      </router-view>
     </div>
   </div>
 </template>
