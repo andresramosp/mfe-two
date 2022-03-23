@@ -1,34 +1,39 @@
 <template>
   <div class="hello">
-    <h1>{{ 'Hello from Micro Frontend Two_' }}</h1>
-    <ChildComponent />
-    <button @click="$emit('someEvent')">click me</button>
+    <MfeTwoChildComponent/>
+    {{ moment().format('MMMM Do YYYY, h:mm:ss a') }}
+    <br />
+    <span style="color: #409eff">{{ message }}</span>
   </div>
 </template>
 
 <script>
 import { ref } from "vue";
-// import 'element-plus/dist/index.css'
-import ChildComponent from './MfeTwo-ChildComponent.vue'
+import moment from "moment"
+import MfeTwoChildComponent from "./MfeTwo-ChildComponent.vue";
 
 export default {
   components: {
-    ChildComponent
+    MfeTwoChildComponent,
   },
-  props: {
-  },
+  props: {},
 
   setup() {
-    const count = ref(0);
+
+    const message = ref("");
+
+    window.addEventListener("hello-event", () => {
+      message.value = "Hello!";
+    });
 
     // expose to template and other options API hooks
     return {
-      count,
+      message,
+      moment
     };
   },
 
   mounted() {
-    console.log(this.count); // 0
   },
 };
 </script>

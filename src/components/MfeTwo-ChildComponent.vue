@@ -1,21 +1,42 @@
 <template>
- <div class="demo-progress">
-    <el-progress :percentage="50" />
-    <el-progress :percentage="100" />
-    <el-progress :percentage="100" status="success" />
-    <el-progress :percentage="100" status="warning" />
-    <el-progress :percentage="50" status="exception" />
+  <div class="p-fluid grid formgrid">
+    <div class="field col-12 md:col-4" style="width: 200px">
+      <Calendar id="basic" v-model="date1" autocomplete="off"></Calendar>
+    </div>
   </div>
 </template>
 
 <script>
-import { ElProgress } from "element-plus";
+import Calendar from 'primevue/calendar/sfc';
+import { ref } from "vue";
 export default {
   components: {
-    ElProgress,
+    Calendar
   },
   setup() {
-    
+    const date1 = ref(new Date());
+
+    return { date1 };
   },
 };
 </script>
+
+<style>
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.text {
+  font-size: 14px;
+}
+
+.item {
+  margin-bottom: 18px;
+}
+
+.box-card {
+  width: 480px;
+}
+</style>
