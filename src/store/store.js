@@ -6,6 +6,8 @@ const store = createStore({
       token: null,
       name: '',
       email: '',
+      stepsGeneric: [],
+
     }
   },
   mutations: {
@@ -16,14 +18,25 @@ const store = createStore({
       state.token = token
     },
     setEmail(state, email) {
-        state.email = email
-      },
+      state.email = email
+    },
+    setStepsGeneric(state, steps) {
+      state.stepsGeneric = steps
+    }
   },
   actions: {
     setAuth(state, auth) {
       state.commit('setToken', auth.sessionToken)
       state.commit('setUserName', auth.userName)
       state.commit('setEmail', auth.email)
+    },
+    getStepsGeneric(state) {
+      const steps = [
+        { name: 'Paso 0' },
+        { name: 'Paso 1' },
+        { name: 'Paso 2' },
+        { name: 'Paso 3' }]
+      state.commit('setStepsGeneric', steps)
     }
   },
   getters: {

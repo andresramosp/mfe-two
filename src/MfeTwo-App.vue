@@ -38,6 +38,8 @@ export default {
       store.dispatch('setAuth', payload)
     });
 
+    store.dispatch('getStepsGeneric')
+
     return {
       logged,
       userLabel

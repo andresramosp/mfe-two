@@ -4,6 +4,9 @@
     <div class="shared-comp">
       <SharedComponent />
     </div>
+    <div class="shared-comp-2">
+      <SharedComponentGeneric :steps="store.state.stepsGeneric" />
+    </div>
 
     {{ moment().format("MMMM Do YYYY, h:mm:ss a") }}
     <br />
@@ -13,6 +16,7 @@
 
 <script>
 import { ref, defineAsyncComponent } from "vue";
+import { useStore } from 'vuex'
 import moment from "moment";
 import MfeTwoChildComponent from "./MfeTwo-ChildComponent.vue";
 
@@ -22,10 +26,15 @@ export default {
     SharedComponent: defineAsyncComponent(() =>
       import("MfeOne/SharedComponent")
     ),
+    SharedComponentGeneric: defineAsyncComponent(() =>
+      import("MfeOne/SharedComponentGeneric")
+    ),
   },
   props: {},
 
   setup() {
+    const store = useStore()
+
     const message = ref("");
 
     window.addEventListener("hello-event", () => {
@@ -36,6 +45,7 @@ export default {
     return {
       message,
       moment,
+      store
     };
   },
 
@@ -65,6 +75,15 @@ a {
   padding: 10px;
   width: 400px;
   margin-top: 10px;
+  margin-left: 40%;
+
+}
+.shared-comp-2 {
+  background-color: lightseagreen;
+  padding: 10px;
+  width: 400px;
+  margin-top: 10px;
+  margin-left: 40%;
 
 }
 </style>
