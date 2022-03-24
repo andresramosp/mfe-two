@@ -3,7 +3,7 @@ const ModuleFederationPlugin = require('webpack').container.ModuleFederationPlug
 const deps = require("./package.json");
 module.exports = defineConfig({
   transpileDependencies: true,
-  publicPath: 'http://localhost:9998/',
+  publicPath: 'https://module-federation-mfe-two.herokuapp.com/',
   devServer: { port: 9998 },
   configureWebpack: {
     optimization: {
@@ -17,8 +17,9 @@ module.exports = defineConfig({
         name: 'MfeTwo',
         filename: 'remoteEntry.js',
         remotes: {
-          ModuleAuth: 'ModuleAuth@http://localhost:9898/remoteEntry.js',
-          MfeOne: 'MfeOne@http://localhost:9999/remoteEntry.js',
+          ModuleAuth: 'ModuleAuth@https://module-federation-module-auth.herokuapp.com/remoteEntry.js',
+          // MfeOne: 'MfeOne@http://localhost:9999/remoteEntry.js',
+          MfeOne: 'MfeOne@https://module-federation-mfe-one.herokuapp.com/remoteEntry.js',
         },
         exposes: {
           './MfeTwo': './src/bootstrap.js' // implica wrapper en consumer que use el mount exportado por main
