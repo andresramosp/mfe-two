@@ -1,16 +1,28 @@
 <template>
   <div class="hello" style="position: relative">
-    <div><MfeTwoChildComponent /></div>
-    <div class="shared-comp">
-      <SharedComponent />
-    </div>
-    <div class="shared-comp-2">
-      <SharedComponentGeneric :steps="store.state.stepsGeneric" />
-    </div>
 
-    {{ moment().format("MMMM Do YYYY, h:mm:ss a") }}
+<el-row :gutter="50">
+      <el-col :span="8"
+        ><div class="grid-content bg-purple" />
+        <MfeTwoChildComponent />
+      </el-col>
+      <el-col :span="8"
+        ><div class="grid-content bg-purple" />
+        <div class="shared-comp">
+          <SharedComponent />
+        </div>
+      </el-col>
+      <el-col :span="8"
+        ><div class="grid-content bg-purple" />
+        <div class="shared-comp-2">
+          <SharedComponentGeneric :steps="store.state.stepsGeneric" />
+        </div>
+      </el-col>
+    </el-row>
+
+    Moment.js <br /> {{ moment().format("MMMM Do YYYY, h:mm:ss a") }}
     <br />
-    <span style="color: #409eff">{{ message }}</span>
+    <span style="color: #409eff">Message from MfeOne: {{ message }}</span>
   </div>
 </template>
 
@@ -73,17 +85,12 @@ a {
 .shared-comp {
   background-color: lightgray;
   padding: 10px;
-  width: 400px;
-  margin-top: 10px;
-  margin-left: 40%;
+  width: 100%;
 
 }
 .shared-comp-2 {
   background-color: lightseagreen;
   padding: 10px;
-  width: 400px;
-  margin-top: 10px;
-  margin-left: 40%;
-
+  width: 100%;
 }
 </style>

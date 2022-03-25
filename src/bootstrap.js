@@ -2,16 +2,13 @@ import { createApp } from 'vue'
 import MfeTwoApp from './MfeTwo-App.vue'
 import { createRouter, createWebHashHistory } from "vue-router";
 
-import PrimeVue from 'primevue/config';
+import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css'
 
 import store from './store/store'
 
 import RouteOne from './views/MfeTwo-RouteOne'
 import RouteTwo from './views/MfeTwo-RouteTwo'
-
-import 'primevue/resources/themes/saga-blue/theme.css';
-import 'primevue/resources/primevue.min.css';
-import 'primeicons/primeicons.css';
 
 const routes = [
     { path: '/', component: RouteOne },
@@ -28,7 +25,7 @@ const mount = (el) => {
     const app = createApp(MfeTwoApp)
     app.use(router)
     app.use(store)
-    app.use(PrimeVue)
+    app.use(ElementPlus)
     app.mount(el)
 };
 

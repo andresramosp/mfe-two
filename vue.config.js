@@ -3,7 +3,11 @@ const ModuleFederationPlugin = require('webpack').container.ModuleFederationPlug
 const deps = require("./package.json");
 module.exports = defineConfig({
   transpileDependencies: true,
-  publicPath: 'https://module-federation-mfe-two.herokuapp.com/',
+  publicPath: process.env.VUE_APP_REMOTES === 'local' ?
+    // DEVELOPMENT
+    'http://localhost:9998/' :
+    // PRODUCTION
+    'https://module-federation-mfe-two.herokuapp.com/',
   devServer: { port: 9998 },
   configureWebpack: {
     optimization: {
@@ -16,24 +20,27 @@ module.exports = defineConfig({
       new ModuleFederationPlugin({
         name: 'MfeTwo',
         filename: 'remoteEntry.js',
-        remotes: {
-          ModuleAuth: 'ModuleAuth@https://module-federation-module-auth.herokuapp.com/remoteEntry.js',
-          // MfeOne: 'MfeOne@http://localhost:9999/remoteEntry.js',
-          MfeOne: 'MfeOne@https://module-federation-mfe-one.herokuapp.com/remoteEntry.js',
-        },
+        remotes: process.env.VUE_APP_REMOTES === 'local' ?
+          // DEVELOPMENT
+          {
+            ModuleAuth: 'ModuleAuth@http://localhost:9898/remoteEntry.js',
+            MfeOne: 'MfeOne@http://localhost:9999/remoteEntry.js',
+          } :
+          // PRODUCTION
+          {
+            ModuleAuth: 'ModuleAuth@https://module-federation-module-auth.herokuapp.com/remoteEntry.js',
+            MfeOne: 'MfeOne@https://module-federation-mfe-one.herokuapp.com/remoteEntry.js',
+          },
         exposes: {
-          './MfeTwo': './src/bootstrap.js' // implica wrapper en consumer que use el mount exportado por main
-          //'./MfeTwo': './src/components/MfeTwo-MainComponent.vue'
+          './MfeTwo': './src/bootstrap.js'
         },
         shared: {
           vue: {
-            // eager: true,
             singleton: true,
             requiredVersion: deps.vue
           },
           ...require('./package.json').dependencies
         },
-        //shared: require('./package.json').dependencies,
       })
     ]
   }
