@@ -83,14 +83,21 @@ a {
   color: #42b983;
 }
 .shared-comp {
+  padding: 20px;
   background-color: lightgray;
-  padding: 10px;
-  width: 100%;
-
+  width: 90%;
+  /* position: absolute;
+  right: 20px;
+  top: 150px; */
 }
 .shared-comp-2 {
+  padding: 20px;
   background-color: lightseagreen;
-  padding: 10px;
-  width: 100%;
+  width: 90%;
+  min-height: 199px;
+
+  /* position: absolute;
+  right: 20px;
+  top: 370px; */
 }
 </style>

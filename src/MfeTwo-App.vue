@@ -39,6 +39,7 @@ export default {
     });
 
     store.dispatch("getStepsGeneric");
+    store.dispatch("getPets");
 
     return {
       logged,

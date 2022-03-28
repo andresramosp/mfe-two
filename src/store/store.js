@@ -1,4 +1,5 @@
 import { createStore } from 'vuex'
+import { Configuration, PetApiFactory } from "Shell/clientApi";
 
 const store = createStore({
   state() {
@@ -7,6 +8,7 @@ const store = createStore({
       name: '',
       email: '',
       stepsGeneric: [],
+      pets: []
 
     }
   },
@@ -22,7 +24,10 @@ const store = createStore({
     },
     setStepsGeneric(state, steps) {
       state.stepsGeneric = steps
-    }
+    },
+    setPets(state, pets) {
+      state.pets = pets
+    },
   },
   actions: {
     setAuth(state, auth) {
@@ -37,6 +42,15 @@ const store = createStore({
         { name: 'Paso 2' },
         { name: 'Paso 3' }]
       state.commit('setStepsGeneric', steps)
+    },
+    async getPets(state) {
+      const config = new Configuration({
+        basePath: window.location.origin, // 1
+      });
+      const apiFactory = PetApiFactory(config);
+      let result = await apiFactory.findPetsByStatus(['available', 'pending', 'sold'])
+      state.commit('setPets', result)
+      console.log(result)
     }
   },
   getters: {
@@ -45,6 +59,16 @@ const store = createStore({
     },
     getUserLabel(state) {
       return `${state.userName} (${state.email})`
+    },
+    pets(state) {
+      return state.pets
+        .filter(p => p.name !== 'doggie')
+        .slice(0, 50)
+        .map(p => {
+          return {
+            ...p, id: parseInt(Math.random() * 1000)
+          }
+        })
     }
   }
 })

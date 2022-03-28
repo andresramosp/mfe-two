@@ -25,11 +25,13 @@ module.exports = defineConfig({
           {
             ModuleAuth: 'ModuleAuth@http://localhost:9898/remoteEntry.js',
             MfeOne: 'MfeOne@http://localhost:9999/remoteEntry.js',
+            Shell: 'Shell@http://localhost:8080/remoteEntry.js'
           } :
           // PRODUCTION
           {
             ModuleAuth: 'ModuleAuth@https://module-federation-module-auth.herokuapp.com/remoteEntry.js',
             MfeOne: 'MfeOne@https://module-federation-mfe-one.herokuapp.com/remoteEntry.js',
+            Shell: 'Shell@https://module-federation-mfe-consumer.herokuapp.com/remoteEntry.js'
           },
         exposes: {
           './MfeTwo': './src/bootstrap.js'
