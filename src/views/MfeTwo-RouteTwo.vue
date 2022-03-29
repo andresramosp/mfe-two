@@ -12,4 +12,5 @@
   margin-left: auto;
   margin-right: auto;
   width: 50%;
+  margin-bottom: 40px;
 }</style>
