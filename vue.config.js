@@ -41,6 +41,9 @@ module.exports = defineConfig({
             singleton: true,
             requiredVersion: deps.vue
           },
+          'vue-router': {
+            singleton: true,
+          },
           ...require('./package.json').dependencies
         },
       })
