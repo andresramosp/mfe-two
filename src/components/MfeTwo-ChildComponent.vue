@@ -1,6 +1,6 @@
 <template>
   <div class="shared-comp-2">
-    Datos de PetStore, usando Client API común de la Shell
+    Datos de PetStore, usando Client API 2 de la Shell
     <el-table
     :header-cell-style="{ background: 'lightgray', color: 'black' }"
     :data="pets"
